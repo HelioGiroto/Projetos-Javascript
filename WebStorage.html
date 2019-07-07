@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Helio Giroto">
+    <title>Web Storage App</title>
+
+<script>
+
+		// Esta função armazena (grava) um registro no Web Storage. É acionada pelo primeiro botão da pág.
+		function grava() {
+
+			// Criadas Variáveis que recebem horários e datas (serão campos usados no registro):
+			var d = new Date()
+			var ano = d.getFullYear()
+			var mes = d.getMonth()
+			var dia = d.getDate()
+			var h = d.getHours()
+			var m = d.getMinutes()
+			
+			// Pega valores colocados no formulário:
+			var nome = document.forms["formulario"]["nome"].value
+			var valor = document.forms["formulario"]["valor"].value
+			
+			// Abaixo: É para não gravar "undefined" caso não exista a variável alunos no Web Storage!		
+			if (!localStorage.alunos){localStorage.alunos=""}		
+	
+			//Abaixo: Formato para ESCRITA no Web Storage = O pipe indica que deve ser substituido por \n ao exportar para CSV:
+			// Novo tipo de concatenação do JS com ${variável}:
+			localStorage.alunos = localStorage.alunos + `${ano}-${mes}-${dia};${h}:${m};${nome};${valor}|`
+		}
+
+
+
+		// Esta função imprime um registro do Web Storage. É acionada pelo 2o. botão da pág.
+		function imprime(){
+					
+			//	document.getElementById("cabecalho").innerHTML = "Gravados: " + localStorage.alunos	// tb funciona!!!
+
+			// Pega todos os registros salvos no Web Storage:
+			var lista = localStorage.getItem("alunos")
+			// Destes dados, substitui o caracter pipe por uma quebra de linha: (É preciso escapar o pipe)
+			var dados = lista.replace(/\|/g, "<br/>")
+			// Novo tipo de concatenação do JS: 	(Imprime dados na tela no id cabeçalhos):
+			document.getElementById("cabecalho").innerHTML = `Gravados:<br/>${dados}`
+		}
+
+
+		// Esta função exporta os dados do Web Storage para um arquivo CSV:
+		 function exportaCSV() {
+
+			// Pega o conteúdo do Web Storage:
+			var arqBruto = localStorage.getItem( "alunos" )
+			// Substitui o caracter pipe para quebra de linha:
+			var arq = arqBruto.replace(/\|/g, '\n')
+			// Cria um Blob tipo arquivo CSV:
+			var blob = new Blob([arq], {type: "text/csv"})
+			// Cria uma URL para baixar o arquivo CSV
+			var url = URL.createObjectURL(blob)
+			// Localiza a tag TAG - no caso abaixo de ID: baixar
+			var a = document.getElementById("baixar")
+			// Atribui a URL ao atributo HREF da tag <a>
+			a.href = url
+			// Dá nome ao arquivo que será salvo na pasta Downloads (Atribui uma propriedade de nome de arquivo de exportação)
+			a.download = "alunos.csv"
+		}
+
+
+</script>
+
+</head>
+
+<body>
+
+	<h1>WEB STORAGE APP</h1>
+	<h3>Cadastre alguns alunos!!!!</h3>
+	
+	<form name="formulario">
+		Nome:
+		<input type="text" name="nome" />
+
+		<br>
+
+		Valor:
+		<input type="text" name="valor" />
+	</form>
+
+	<button onclick="grava()">Grava!</button>
+
+	<br>
+
+	<button onclick="imprime()">VER DADOS</button>
+
+	<p id="cabecalho"></p>
+
+    <button onclick="exportaCSV()">Exporta para arquivo CSV</button><br>
+    <a id="baixar">Faz download de CSV</a>
+
+</body>
+
+<!--
+
+FONTES SEGUE:
+//   https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webstorage_local_clickcount
+//   https://www.devmedia.com.br/trabalhando-com-html5-local-storage-e-json/29045
+//   http://www.kadunew.com/blog/html/html5-local-storage-armazenamento-de-dados-no-navegador
+//   https://stackoverflow.com/questions/16428835/save-data-from-localstorage-to-csv#16430518
+
+-->
+</html>
