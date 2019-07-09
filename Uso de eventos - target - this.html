@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	 
+	<head>
+		<meta charset="UTF-8" />
+		<title>Teste de Página</title>
+		<style>
+			.amarelo { 	background-color: yellow; 	}
+		</style>
+	</head>
+	 
+	<body>
+
+		<h1 onClick="alert(this.innerHTML);"> Clique aqui no título... </h1>
+
+		<p class="ok" id="h">CLIQUE AQUI no <strong>primeiro</strong> parágrafo</p>
+		<p class="ok">ESSE é o segundo parágrafo</p>
+ 		<p class="ok">ESSE é o terceiro parágrafo</p> <br>
+		<p class="ok"><strong>Clique</strong> em algum item abaixo:</p>
+
+		<ul id="fora">
+		    <li  >aaaaaa</li>
+		    <li >bbb</li>
+		    <li  >ccc</li>
+		</ul>
+
+		<script>
+
+			// Definindo os ...
+
+			// 1 - Disparadores de eventos:
+			var lista = document.getElementById('fora');
+			var primeiraLinha =  document.getElementById("h")
+
+
+			// 2 - Eventos:
+			function capta () { 
+				alert(this.innerHTML) 
+				alert(this.innerText)
+			}
+
+			function pinta(e) {
+
+				// Dá alerta com o texto correspondente ao li clicado:
+				alert("Texto: " + e.target.innerHTML);  // poderia tb ser innerText
+				// Pega este texto para usálo depois...
+				txt = e.target.innerText
+
+				// Colocamos uma id neste elemento clicado (para quê? ver linha 60-61)
+				e.target.setAttribute('id','clicado')
+				// e.target.id = "clicado" 		// Outra opção. Resultado igual à linha acima.
+
+				// Mostra um alert com o nome do id acrescentado a este elemento clicado:
+				alert("Novo id= " + e.target.id)  
+				// ACIMA: poderia usar este tb se CADA <li> tivesse um nome de id diferente como dentro1, dentro 2, dentro3
+
+				// 
+				alert(e.target.style.color) // não funciona... :/
+
+				// Vamos mudar o elemento clicado (que atribuimos a ele um id - linha 50-51) de parágrafo para um H3:
+				document.getElementById("clicado").innerHTML = `<h3 class="amarelo">${txt}</h3>`
+
+				// Abrir o console para ver as propriedades usadas em event:
+				console.dir(e.target)  // Em FIREFOX mudar de console.dir para console.log.
+			}
+
+
+			// 3 - Chama os eventos:
+			// 	( Nos 2 modos; o terceiro está na linha 21 ) 
+			primeiraLinha.onclick = capta
+			lista.addEventListener('click', pinta)
+		
+			// Poderiamos usar tb um evento onselect para efeito nas frases selecionadas que mudariam de cor! 
+			// Mas neste caso, deveria se usar replace...
+
+			// Exemplos:
+			// https://pt.stackoverflow.com/questions/21452/capturar-id-de-um-elemento-com-click-em-javascript
+			// https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_target
+			// https://stackoverflow.com/questions/7723188/what-properties-can-i-use-with-event-target
+
+		</script>
+ 
+	</body>
+
+</html>
+ 
+
