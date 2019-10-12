@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head> 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    	<title>GÁS CANOAS</title>
+	<style>
+		body {
+			background-color: CornflowerBlue;
+			color: white;
+			font-size: 1.3em;
+		}
+
+		label {
+			margin-bottom: 5px;			
+		}
+
+		#box {
+			margin-bottom: 25px;
+			width: 70%;
+			font-size: 1.3em;
+			padding: 5px;
+		}
+
+		#adicionaRota {
+			margin-top: 15px;
+			padding: 10px;
+			width: 20%;
+			background: #f0f0f5;
+		}
+
+		#btRota {
+			padding: 10px;
+			width: 25%;
+			background: yellow;
+		}
+
+		#btComparte {
+			display: none;
+			background: yellow;
+		}
+		
+		#lista {
+			margin: 25px 10%;
+			background: #ffe6e6;
+			padding: 15px;
+			display: block;
+			color: #993300;
+		}	
+
+		.amarelo {color: yellow;}
+	</style>
+</head>
+
+<body>
+		
+	<center>
+		<h1 class="amarelo">PESQUISAR ROTA!</h1>
+
+		<label>Digite o(s) ENDEREÇO(S) de entrega:</label><br><br>
+		<input id="box" type="text"><br>
+
+		<button id="adicionaRota" onclick="formaArray()"><strong>+ endereços</strong></button><br><br>
+		
+		<button id="btComparte" onclick="compartilha()">COMPARTILHA AO MOTORISTA</button>
+		<div id="mapa"></div>
+	</center>
+
+	<div id="lista">
+		<strong>Endereço de origem:</strong><br>
+		Av. Rio dos Sinos, 925 - Harmonia - Canoas/RS
+		<hr>
+	</div>
+	
+	<center>
+		<button id="btRota" onclick="rota()"><strong>MOSTRAR ROTA NO MAPA</strong></button>
+	</center>
+<script>
+
+var items = [];
+
+	function formaArray() {
+		box = document.getElementById('box').value;
+		boxvalue = box.replace(/,/g , "-")
+		items.push(boxvalue)
+		document.getElementById('box').value = ""
+		document.getElementById("lista").innerHTML += box + "<br>"
+		console.log(items)
+	}
+
+	function rota() {
+		// O formato url deve ser: https://www.google.com.br/maps/dir/Av.+Rio+dos+Sinos,+925+-+Harmonia,+Canoas+-+RS,+/R.+Dr.+Barcelos,+200+Porto+Alegre+-+RS/R.+Dr.+Barcelos,+200+-+Centro,+Canoas+-+RS,+/Mercado+Publico+de+Porto+Alegre+-+Centro+Historico,+Porto+Alegre+-+RS
+
+		destino = items.toString()
+		destino = destino.replace(/ /g, "+").replace(/,/g , ",+/")
+
+		// Abaixo: já sai com a origem daqui do depósito:
+		endereco = `https://www.google.com.br/maps/dir/Av.+Rio+dos+Sinos,+925+-+Harmonia,+Canoas+-+RS/${destino}`
+		c = document.getElementById("btComparte")
+		
+		// c.style.display = "block"
+		window.open(endereco)
+
+		//url = endereco.replace(/\+/g , "-")
+		
+		//document.getElementById("mapa").innerHTML = `<iframe src="${url}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>`
+
+	}
+
+	function compartilha() {
+		window.open(`https://api.whatsapp.com/send?phone=+5211952527695&text=${endereco}`)
+//		window.location = `https://api.whatsapp.com/send?text=${endereco}`
+	}
+
+
+	function mostraMapa() {
+		//iframe src="https://www.google.com/maps/embed?pb=!1m40!1m12!1m3!1d27668.081718720503!2d-51.217153909757165!3d-29.907210343659415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m25!3e6!4m5!1s0x951965331f1e98af%3A0xd829fc88f0cf6cc!2sAv.%20Rio%20dos%20Sinos%2C%20925%20-%20Harmonia%2C%20Canoas%20-%20RS%2C%2092320-750!3m2!1d-29.9150732!2d-51.2079739!4m5!1s0x951965331f1e98af%3A0xd829fc88f0cf6cc!2sAv.%20Rio%20dos%20Sinos%2C%20925%20-%20Harmonia%2C%20Canoas%20-%20RS%2C%2092320-750!3m2!1d-29.9150732!2d-51.2079739!4m5!1s0x9519653d240be111%3A0x770c3d9545cdb68c!2sR.%20Santa%20Catarina%2C%201600%20-%20Mathias%20Velho%2C%20Canoas%20-%20RS%2C%2092330-170!3m2!1d-29.899597699999998!2d-51.2098788!4m5!1s0x95197aac1fcc289f%3A0x46d1d391799ef6a8!2sR.%20Dr.%20Barcelos%2C%20200%20-%20Centro%2C%20Canoas%20-%20RS%2C%2092310-200!3m2!1d-29.9133107!2d-51.185592899999996!5e0!3m2!1spt-BR!2sbr!4v1570893379510!5m2!1spt-BR!2sbr" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+		//<iframe src="https://www.google.com.br/maps/dir/Av.+Rio+dos+Sinos,+925+-+Harmonia,+Canoas+-+RS,+92320-750/Av.+Rio+dos+Sinos,+925+-+Harmonia,+Canoas+-+RS,+92320-750/R.+Santa+Catarina,+1600+-+Mathias+Velho,+Canoas+-+RS,+92330-170/R.+Dr.+Barcelos,+200+-+Centro,+Canoas+-+RS,+92310-200/">
+
+}
+
+	// VERIFICAR FUNCÕES:
+	// https://stackoverflow.com/questions/33198429/how-to-print-elements-from-array-with-javascript
+	// https://stackoverflow.com/questions/47078498/javascript-add-value-from-input-box-to-array/47078563
+	// https://www.w3schools.com/jsref/jsref_join.asp
+
+
+</script>
+
+</body>
+</html>
