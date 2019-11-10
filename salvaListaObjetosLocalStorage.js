@@ -38,7 +38,7 @@
 	localStorage.lista1 = JSON.stringify(listaProdutos)
 
 
-// PAra visualizar tais registros salvos, tem que abrir o Inspetor do Navegador e na aba Aplication procirar
+// Para visualizar tais registros salvos, tem que abrir o Inspetor do Navegador e na aba Application procurar em LocalStorage > file:...
 
 
 // ================================ //
