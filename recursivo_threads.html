@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="result1"></div>
+    <div id="result2"></div>
+    <div id="result3"></div>
+</body>
+
+<script>
+    var MAX_VALUE = 10000;
+
+    function thread1(value, maxValue) {
+        var me = this;
+        document.getElementById("result1").innerHTML = value;
+        value++;
+
+        //Continue execution
+        if (value <= maxValue)
+            setTimeout(function () {
+                me.thread1(value, maxValue);
+            }, 0);
+    }
+
+    function thread2(value, maxValue) {
+        var me = this;
+        document.getElementById("result2").innerHTML = value;
+        value++;
+
+        if (value <= maxValue)
+            setTimeout(function () {
+                me.thread2(value, maxValue);
+            }, 0);
+    }
+
+    function thread3(value, maxValue) {
+        var me = this;
+        document.getElementById("result3").innerHTML = value;
+        value++;
+
+        if (value <= maxValue)
+            setTimeout(function () {
+                me.thread3(value, maxValue);
+            }, 0);
+    }
+
+    thread1(0, MAX_VALUE);
+    thread2(0, MAX_VALUE);
+    thread3(0, MAX_VALUE);
+
+    // https://stackoverflow.com/questions/30036/javascript-and-threads
+
+        //https: //developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/funcoes_assincronas
+        //https: //pt.stackoverflow.com/questions/16921/como-realmente-aprender-a-usar-promessas-em-javascript
+        //https: //stackoverflow.com/questions/30036/javascript-and-threads
+        //https: //www.w3schools.com/html/tryit.asp?filename=tryhtml5_webworker
+        //https: //www.linkedin.com/pulse/criando-aplica%C3%A7%C3%B5es-multi-thread-em-javascript-pochintesta
+</script>
+
+</html>
