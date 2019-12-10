@@ -1,0 +1,24 @@
+// 1. Faz um formulario no google forms.
+
+// 2. Copia pelo devTools cada input no formulario e cola no html que será elaborado
+
+// 3. copia o url do formulario google e muda o prefixo para /formResponse 
+
+// 4. pega o ulr deste frmulario na tag <form> como abaixo:
+
+
+// 5. para enviar um formulário para o google forms e redirecionar a resposta final para outra página. Evitando de abrir a página convencional do google forms ao terminar de submeter:
+
+    // antes do body:
+    <script type="text/javascript"> let submitted = false; </script>
+
+    // dentro do body:
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {window.location='obrigado.html'}"></iframe>
+
+    // como deve ser a tag form:
+    <form action="https://docs.google.com/forms/d/e/blablablablablablabla/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true; chamaFunção()">
+            // ...
+    </form>
+
+
+// 6. *chamaFunção() - apenas se quer que além de enviar o formulario para o google forms faça algo mais.
