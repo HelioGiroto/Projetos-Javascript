@@ -22,3 +22,7 @@
 
 
 // 6. *chamaFunção() - apenas se quer que além de enviar o formulario para o google forms faça algo mais.
+
+// 7. Campo Google Form para receber valor automático (não por meio do usuário) - em caso de formulários/campos ocultos (tipo hora, data...): só recebe valor se for campo TEXTAREA. Um input type=text não aceita.
+//Ex.:     document.forms["formulario"]["entry.1717171717"].value = `${hora}`
+
