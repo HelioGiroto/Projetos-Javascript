@@ -1,0 +1,101 @@
+COMO CRIAR UMA APP ELECTRON
+
+- Há que instalar o NodeJS e o Electron:
+$ npm install -g electron
+
+1. Além de todo seu html completo, crie tb os arquivos:
+	- package.json  ->  Edita nome da app, palavras chave, etc
+	- main.js	->  Edita comportamento da app: janelas, menu...
+
+2. Agora na pasta em que se salvoou todos estes acima, se abre o Terminal e digita:
+$ electron .
+
+ // ver tb: https://electronjs.org/docs/tutorial/first-apps
+
+
+
+
+// OUTRA opção mais trabalhosa: =========================================
+
+
+1. Escolha o nome da app e cria uma pasta para ela com o seguinte comando:
+$ git clone https://github.com/electron/electron-quick-start nomeApp
+
+
+2. Agora se instala o electron:
+$ npm install -g electron
+
+
+3. Para executar basta: 
+$ electron .
+
+
+4. Mude o index.html para aquele que vc prefere:
+$ cp index.html . 
+
+
+5. Editar os arquivos:
+	- package.json  ->  Edita nome da app, palavras chave, etc
+	- main.js	->  Edita comportamento da app: janelas, menu...
+
+
+6. Para chamar: No Terminal (na mesma pasta onde está a app):
+$ electron .
+
+
+7. Para criar executável: 
+    win32:	electron-packager . nomeApp --platform=win32 --arch=ia32
+    win64: 	electron-packager . nomeApp --platform=win32 --arch=x64
+    linux32: 	electron-packager . nomeApp --platform=linux --arch=ia32
+    linux64: 	electron-packager . nomeApp --platform=linux --arch=x64
+    osx: 	electron-packager . nomeApp --platform=darwin --arch=x64
+
+
+// OBS.: Com o executável, não se poderá acessar o devTools...
+
+  829  apropos chromium
+  830  sudo apt install chromium
+  831  sudo apt install chromium-browser -y
+  832  chromium-browser 
+  833  arch
+  834  nom -v
+  835  npm -v
+  836  node -v
+  837  npm i -g electron-prebuilt
+  838  electron .
+  839  git clone https://github.com/atom/electron-quick-start
+  840  sudo apt install git
+  841  cd electron-quick-start
+  842  git clone https://github.com/atom/electron-quick-start
+  843  cd electron-quick-start
+  844  npm install && npm start
+  845  ls
+  846  npm start
+  847  nautilus . &
+  848  npm start
+  849  nautilus . &
+  850  npm start
+  851  history
+  852  cd
+  853  history > hist_mun.txt
+  854  nautilus . &
+  855  history
+  856  npm start
+  857  clear
+  858  ls
+  859  ls -t
+  860  ls -t | head
+  861  cd electron-quick-start/
+  862  npm start
+  863  cd electron-quick-start/
+  864  npm start
+  865  electron-packager
+  866  npm -i -g electron-packager
+  867  npm install --global electron-packager
+  868  electron-packager
+  869  cd instrutor/
+  870  ls
+  871  exit
+  872  alpine
+  873  npm start
+

@@ -1,0 +1,21 @@
+{
+  "name": "Nome_da_Aplicacao",
+  "version": "1.0.0",
+  "description": "Aplicação para etc etc tal",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "",
+  "keywords": [
+    "palavras-chave",
+    "palavras-chave",
+    "palavras-chave",
+    "palavras-chave"
+  ],
+  "author": "Helio Giroto",
+  "license": "",
+  "devDependencies": {
+    "electron": "^7.1.5"
+  }
+}
