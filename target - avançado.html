@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pesquisa de Satisfação</title>
+    <style>
+
+        body{
+            background: lightgray;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .quadrado {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 15px;
+            padding: 10px;
+            border: solid black;
+        }
+
+        .pergunta {
+            font-family: ;
+            padding-bottom: 7px;
+            text-align: center;
+        }
+
+        .emoticons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        img {
+            width: 10%;
+            margin: 0 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+
+        <div id="" class="quadrado">
+            <div class="pergunta">LIMPEZA:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">INFRAESTRUTURA:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">FROTA DE VEÍCULOS:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">INFORMAÇÕES VISÍVEIS:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">HORÁRIO DE FUNCIONAMENTO:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">PREÇO:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">CONDIÇÕES DE PAGAMENTO:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">ATENDIMENTO:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">ORIENTAÇÕES FORNECIDAS:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">AGILIDADE:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">QUALIDADE DOS SERVIÇOS PRESTADOS:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">PRAZO EM QUE FORAM REALIZADOS OS SERVIÇOS:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">AULAS PRÁTICAS MINISTRADAS:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">ITENS DO SORTEIO DA PROMOÇÃO:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">AVALIAÇÃO GERAL:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+        <div id="" class="quadrado">
+            <div class="pergunta">RECOMENDA A UM PARENTE OU AMIGO:</div>
+            <div class="emoticons"> <img src="1.png"><img src="2.png"><img src="3.png"><img src="4.png"><img
+                    src="5.png">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        function processa(e){
+            //console.log(e)
+            let questao = e.srcElement.parentElement.parentElement.innerText
+            console.log(questao)
+            let arq = e.target.src
+            let nota = arq.split("/")[7].replace(/\.png/, "")
+            console.log(nota)
+            // erro: console.log({questao : Number(nota)})
+        }
+
+
+        window.addEventListener("click", processa)
+
+    </script>
+</body>
+
+</html>
