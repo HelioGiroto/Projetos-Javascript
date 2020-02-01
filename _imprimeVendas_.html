@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IMPRESSÃO DE VENDAS POR CARTÃO</title>
+</head>
+
+<style>
+    td,
+    th {
+        border: 1px solid black;
+    }
+
+    th {
+        background: lightgray;
+    }
+
+    #tabela td:nth-child(2) {
+        background: lightsalmon;
+    }
+
+    #tabela td:nth-child(4) {
+        text-align: center;
+    }
+
+    #tabela td:nth-child(3),
+    td:nth-child(7),
+    td:nth-child(8) {
+        text-align: right;
+    }
+</style>
+
+<body>
+
+    <h1>IMPRIME VENDAS</h1>
+
+    <div class="areaResultados">
+        <table id="tabela">
+            <th>ID</th>
+            <th>VENCIMENTO</th>
+            <th>VALOR</th>
+            <th>NRO-PARC.</th>
+            <th>BANDEIRA</th>
+            <th>RV</th>
+            <th>TOT-BRUTO</th>
+            <th>TOT-LIQ.</th>
+            <th>DATA VENDA</th>
+            <th> - </th>
+            <th>DATA DO PGTO.</th>
+        </table>
+    </div>
+    <br><br><br>
+    <div style="background: yellow;" class="ok"></div>
+    <br><br>
+    <button id="btBaixa">DAR BAIXA</button>
+
+
+    <script>
+        // variáveis com respeito à datas:
+        let hoje = new Date()
+        let dia = hoje.getDate()
+        dia = dia.toString() // se não converter para string, não acrescenta o 0 no caso abaixo:
+        if (dia.length < 2) {
+            dia = 0 `${dia}`
+        }
+        let mes = hoje.getMonth()
+        // Abaixo: Necessário pq no JS Janeiro é 0. 
+        mes = mes + 1
+        mes = mes.toString() // se não converter para string, não acrescenta o 0 no caso abaixo:
+        if (mes.length < 2) {
+            mes = `0${mes}`
+        }
+        let ano = hoje.getFullYear()
+        let dataHoje = `${dia}/${mes}/${ano}`
+
+        let tab = document.getElementById("tabela")
+        let cel = []
+        let todosCheckbox
+
+        // variáveis sobre arquivos:
+        let linha = ''
+        let ddd = []
+        let tudo = []
+        const url = "http://localhost:3003/dados/"
+
+
+
+        function nroRegistro() {
+            // pega nro. da linha do input clicado
+            console.log("função nroRegistro.")
+            todosCheckbox = document.querySelectorAll('input.inputCheck')
+            let nroLinha = this.parentElement.parentElement.rowIndex
+            console.log('Nro da Linha: ' + nroLinha)
+
+            
+            // pinta esta linha da tabela de amarelo:
+            let todasLinhas = document.querySelectorAll('tr')
+            if (this.checked) {
+                console.log("input da linha " + nroLinha + " checado")
+                todasLinhas[nroLinha].style.backgroundColor = 'yellow' 
+            } else {
+                console.log("input da linha " + nroLinha + " NÃO checado")
+                todasLinhas[nroLinha].style.backgroundColor = 'white' 
+            }
+
+
+            // pega o td[0] desta linha (que corresponde ao id do registro):
+            // nroLinha - 1 porque o caminho do target abaixo, inicia do 0 e não mais da linha #1, 2...:
+            let idDestaLinha = todosCheckbox[nroLinha - 1].parentElement.parentElement.children[0].innerText
+            // OPÇÃO:
+            // todasLinhas[11].cells[0].innerText // <-- PARA PEGAR A TD 0 (do id) DO REGISTRO DA LINHA 11 !!!!!
+            console.log("ID: " + idDestaLinha)
+            
+
+            // pegar todos os checados...:
+            let checkedList = document.querySelectorAll("input:checked")
+            // pega o valor do input com a data de pgto:
+            // todasLinhas[1].cells[10].children[0].value
+            // para futuramente enviar via post para o app.js
+
+        }
+
+
+        function segue() {
+            todosCheckbox = document.querySelectorAll('input.inputCheck')
+            todosCheckbox.forEach(a => {
+                a.addEventListener('click', nroRegistro)
+            })
+        }
+
+
+        // O fetch tem que estar dentro de uma função para funcionar por causa da assincronicidade que impediria dos dados estarem esperando o fetch total.
+        // Além do mais, é bom colocar uma pausa setTimeOut para dar tempo do carregamento.. etc. 
+        function pega() {
+            fetch(url)
+                .then(resp => resp.json())
+                .then(data => {
+                    // ddd é todo o resultado de fetch em forma de texto. Tz seria melhor (acima) ser resp.text() ???:
+                    ddd = JSON.stringify(data)
+
+                    data.map((a, b) => {
+                        a.formaPgto.map((x, y) => {
+                            let linhaTab = tab.insertRow(-1)
+                            let listaDados = [`${x.id}`, `${x.data}`, `${x.valor}`,
+                                `${x.nroParcela}`, `${a.bands}`, `${a.rv}`, `${a.valorBruto}`,
+                                `${a.valorLiquido}`, `${a.dataVenda}`,
+                                '<input class="inputCheck" type="checkbox" name="pg" value="[' +
+                                b + '][' + y + ']" id="vendaId-' + b + '-' + y + '">',
+                                '<input class="inputData" type="text" name="dataPgto" value="' +
+                                dataHoje + '" id="dataPgto-' + b + '-' + y + '">'
+                            ]
+                            for (let i = 0; i < listaDados.length; i++) {
+                                cel[i] = linhaTab.insertCell(i)
+                                cel[i].innerHTML = listaDados[i]
+                            }
+
+                        })
+                    })
+
+                    let rows = [].slice.call(tab.querySelectorAll("tr"))
+
+                    rows.sort((a, b) => {
+                        return a.cells[0].innerHTML - b.cells[0].innerHTML
+                    })
+
+                    rows.forEach(v => {
+                        tab.appendChild(v) // note that .appendChild() *moves* elements
+                    })
+
+                })
+            setTimeout(segue, 2000)
+        }
+
+        pega()
+
+
+        // fora de uma função que espera o ouvidor, a assincronicidade do JS não permitiria que os resultados fossem os esperados.
+        // Por tanto, no console digite sincrono() e veja o resultado que a variável ddd se pode ler fora do fetch!
+        function sincrono() {
+            console.log('DDD: ' + ddd)
+            document.querySelector('.ok').innerHTML = ddd
+        }
+
+
+        function abreConsulta() {
+            // tudo tem que passar por replace...
+            // abre formulário...
+            location.href = "http://localhost:3003/consulta/"
+        }
+
+
+        document.getElementById("btBaixa").addEventListener('click', abreConsulta)
+    </script>
+
+</body>
+
+</html>
