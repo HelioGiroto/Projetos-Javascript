@@ -8,7 +8,7 @@ let arq = [{
     "valorLiquido": "1000",
     "taxaDesconto": "20%",
     "qtdeParcelas": "4",
-    "bands": "Cup",
+    "bandeira": "Cup",
     "formaPgto": [{
         "data": "01/03/2020",
         "valor": "250.00",
@@ -45,7 +45,7 @@ let arq = [{
     "valorLiquido": "900",
     "taxaDesconto": "18.18%",
     "qtdeParcelas": "3",
-    "bands": "American",
+    "bandeira": "American",
     "formaPgto": [{
         "data": "28/02/2020",
         "valor": "300.00",
@@ -75,7 +75,7 @@ let arq = [{
     "valorLiquido": "900",
     "taxaDesconto": "5.26%",
     "qtdeParcelas": "5",
-    "bands": "HiperCard",
+    "bandeira": "HiperCard",
     "formaPgto": [{
         "data": "01/03/2020",
         "valor": "180.00",
@@ -119,7 +119,7 @@ let arq = [{
     "valorLiquido": "3000",
     "taxaDesconto": "7.41%",
     "qtdeParcelas": "7",
-    "bands": "Discover",
+    "bandeira": "Discover",
     "formaPgto": [{
         "data": "07/03/2020",
         "valor": "428.57",
@@ -177,7 +177,7 @@ let arq = [{
     "valorLiquido": "420",
     "taxaDesconto": "7.89%",
     "qtdeParcelas": "4",
-    "bands": "Visa",
+    "bandeira": "Visa",
     "formaPgto": [{
         "data": "07/03/2020",
         "valor": "105.00",
